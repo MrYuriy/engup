@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, json, render_template, redirect, url_for, request
 from app.forms import LoginForm
+from utils.create_moc_translation import create_mock_translation
+
 
 main = Blueprint('main', __name__)
 
@@ -34,3 +36,8 @@ def user_dictionary():
 @main.route('/general_dictionary')
 def general_dictionary():
     return render_template('general_dictionary.html')
+
+@main.route('/create-data')
+def create_translation():
+    create_mock_translation()
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 

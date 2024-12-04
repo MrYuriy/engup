@@ -17,5 +17,9 @@ def create_app(config_class="config.Config"):
     # Register blueprints (if you have routers)
     from app.routers import main as main_blueprint
     app.register_blueprint(main_blueprint)
+    
+    @app.shell_context_processor
+    def make_shell_context():
+        return {'db': db}
 
     return app
